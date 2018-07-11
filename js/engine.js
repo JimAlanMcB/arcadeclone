@@ -110,11 +110,12 @@ var Engine = (function(global) {
                 'images/water-block.png',   // Top row is water
                 'images/stone-block.png',   // Row 1 of 3 of stone
                 'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
+                'images/grass-block.png', // Row 3 of 3 of stone
                 'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/grass-block.png',    // Row 2 of 2 of grass
+                'images/grass-block.png'
             ],
-            numRows = 6,
+            numRows = 7,
             numCols = 7,
             row, col;
         
@@ -152,7 +153,9 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-
+        allCollectables.forEach(function(collectable){
+            collectable.render();
+        });
         player.render();
     }
 
@@ -162,6 +165,9 @@ var Engine = (function(global) {
      */
     function reset() {
         // noop
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        
+
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -172,8 +178,10 @@ var Engine = (function(global) {
         'images/stone-block.png',
         'images/water-block.png',
         'images/grass-block.png',
-        'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/fido.png', 
+        'images/running-cat.png',
+        'images/Star.png',
+        'images/dog-bone.png'
     ]);
     Resources.onReady(init);
 
