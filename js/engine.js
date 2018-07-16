@@ -25,13 +25,16 @@ var Engine = (function(global) {
         lastTime;
 
     canvas.width = 707;
-    canvas.height = 808;
+    canvas.height = 708;
     doc.body.appendChild(canvas);
+    
+    
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
     function main() {
+        
         /* Get our time delta information which is required if your game
          * requires smooth animation. Because everyone's computer processes
          * instructions at different speeds we need a constant value that
@@ -46,6 +49,7 @@ var Engine = (function(global) {
          */
         update(dt);
         render();
+        
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
@@ -65,7 +69,9 @@ var Engine = (function(global) {
     function init() {
         reset();
         lastTime = Date.now();
+        
         main();
+        
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -79,7 +85,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+    
     }
 
     /* This is called by the update function and loops through all of the
@@ -90,10 +96,16 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
+       
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
+        player.update(dt);
+        if(bullets){
+            bullets.forEach(function(bullet){
+            bullet.update();
+            });
+        }
     }
 
     /* This function initially draws the "game level", it will then call
@@ -106,39 +118,15 @@ var Engine = (function(global) {
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
-        var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/grass-block.png', // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png',    // Row 2 of 2 of grass
-                'images/grass-block.png'
-            ],
-            numRows = 7,
-            numCols = 7,
-            row, col;
-        
+       
         // Before drawing, clear existing canvas
         ctx.clearRect(0,0,canvas.width,canvas.height)
 
-        /* Loop through the number of rows and columns we've defined above
-         * and, using the rowImages array, draw the correct image for that
-         * portion of the "grid"
-         */
-        for (row = 0; row < numRows; row++) {
-            for (col = 0; col < numCols; col++) {
-                /* The drawImage function of the canvas' context element
-                 * requires 3 parameters: the image to draw, the x coordinate
-                 * to start drawing and the y coordinate to start drawing.
-                 * We're using our Resources helpers to refer to our images
-                 * so that we get the benefits of caching these images, since
-                 * we're using them over and over.
-                 */
-                ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
-            }
-        }
-
+       //ctx.fillStyle = '#333333';
+    //    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    //    for(col = 0; col < canvas.width/col; col++){
+    //    ctx.drawImage(Resources.get('images/wall.png'), col * 48, 695);
+    //    }
         renderEntities();
     }
 
@@ -150,13 +138,34 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
+        // decals.forEach(function(decal){
+        //     decal.render();
+        // });
+        
+        walls.forEach(function(wall){
+            wall.render();
+        });
+        decal2.render();
+        decal3.render();
+        
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
         allCollectables.forEach(function(collectable){
             collectable.render();
         });
+        if(bullets){
+            bullets.forEach(function(bullet){
+            bullet.render();
+            });
+        }
         player.render();
+        ctx.font = '20px serif';
+        ctx.fillStyle = 'white';
+        ctx.fillText('Level: ' + (Game.level) + '', 5,20);
+        ctx.fillText('Score: ' + (Game.score) + '', 5,40);
+        ctx.fillText('Lives: ' + (Game.lives) + '', 5,60);
+       // wall.render(); custom place
     }
 
     /* This function does nothing but it could have been a good place to
@@ -167,7 +176,6 @@ var Engine = (function(global) {
         // noop
         ctx.clearRect(0,0,canvas.width,canvas.height);
         
-
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -175,13 +183,14 @@ var Engine = (function(global) {
      * all of these images are properly loaded our game will start.
      */
     Resources.load([
-        'images/stone-block.png',
-        'images/water-block.png',
-        'images/grass-block.png',
-        'images/fido.png', 
-        'images/running-cat.png',
-        'images/Star.png',
-        'images/dog-bone.png'
+        
+        'images/shot_side.png', 
+        'images/hero.png',
+        'images/wall.png', 
+        'images/enemy.png',
+        'images/decal1.png',
+        'images/decal2.png', 
+        'images/bullet.png'
     ]);
     Resources.onReady(init);
 
@@ -190,4 +199,5 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+    
 })(this);

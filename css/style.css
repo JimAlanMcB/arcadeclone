@@ -1,4 +1,24 @@
 body {
+    font-family: 'Press Start 2P', cursive;
+    font-style: italic;
+    color: white;
     text-align: center;
-    background-color: #5ec148;
+    background-color: #444444;
     }
+#msg_container {
+    line-height: .3;
+    max-height: 200px;
+    height: 150px;
+}
+canvas{ 
+    border: 1px solid white;
+    background: url('/images/giphy.gif');
+   
+ }
+
+  /* display: block;
+    position: absolute;
+    margin-left: 250px;
+    margin-top: 0px;
+     
+    height: 100%; */
