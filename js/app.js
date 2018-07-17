@@ -17,8 +17,8 @@ let bulletDirection = 'up';
 let canvas = document.getElementsByTagName('canvas');
 canvas.width = 705;
 canvas.height = 675;
-let bgMusic = new Audio('sounds/OffLimits.wav');
-bgMusic.preload = "auto";
+// let bgMusic = new Audio('../sounds/OffLimits.wav');
+// bgMusic.preload = "auto";
 
  // make a loop for sound
 
