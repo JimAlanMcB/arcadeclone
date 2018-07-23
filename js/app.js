@@ -420,19 +420,24 @@ Game.spawnEnemies();
 
 player = new Player(340, 675) // spawn player
 
-document.getElementById('upcontrol').addEventListener('touchstart', function(){
+document.getElementById('upcontrol').addEventListener('touchstart', function(e){
+    e.preventDefault();
     movePlayer('up');
 });
-document.getElementById('downcontrol').addEventListener('touchstart', function(){
+document.getElementById('downcontrol').addEventListener('touchstart', function(e){
+    e.preventDefault();
     movePlayer('down');
 });
-document.getElementById('rightcontrol').addEventListener('touchstart', function(){
+document.getElementById('rightcontrol').addEventListener('touchstart', function(e){
+    e.preventDefault();
     movePlayer('right');
 });
-document.getElementById('leftcontrol').addEventListener('touchstart', function(){
+document.getElementById('leftcontrol').addEventListener('touchstart', function(e){
+    e.preventDefault();
     movePlayer('left');
 });
-document.getElementById('shoot').addEventListener('touchstart', function(){
+document.getElementById('shoot').addEventListener('touchstart', function(e){
+    e.preventDefault();
     fireBullet();
 });
 
