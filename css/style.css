@@ -13,21 +13,31 @@ body {
 canvas{ 
     border: 1px solid white;
     background: url('../images/giphy.gif');
-    width: 60%;
-    height: 375px;
-   
- }
- @media only screen and (min-width: 800px) {
+}
+#button {
+    background: url('../images/button.png');
+}
+div#control {
+    position: absolute;
+    margin-top: 20em;
+    margin-left: 6.8em;
+    opacity: .4;
+}
+ @media (max-width: 65em) {
     h1{
         font-size: 10px;
+        display: none;
     }
     #msg_container {
         display: none;
     }
     canvas {
         margin-top: 30px;
+        width: 50%;
+        height: 375px;
     }
  };
+
 
   /* display: block;
     position: absolute;

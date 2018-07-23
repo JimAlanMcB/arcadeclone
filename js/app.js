@@ -420,6 +420,23 @@ Game.spawnEnemies();
 
 player = new Player(340, 675) // spawn player
 
+document.getElementById('upcontrol').addEventListener('touchstart', function(){
+    movePlayer('up');
+});
+document.getElementById('downcontrol').addEventListener('touchstart', function(){
+    movePlayer('down');
+});
+document.getElementById('rightcontrol').addEventListener('touchstart', function(){
+    movePlayer('right');
+});
+document.getElementById('leftcontrol').addEventListener('touchstart', function(){
+    movePlayer('left');
+});
+document.getElementById('shoot').addEventListener('touchstart', function(){
+    fireBullet();
+});
+
+
 document.addEventListener('keydown', function (e) {
     
     var allowedKeys = {
