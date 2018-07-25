@@ -4,42 +4,62 @@ body {
     color: white;
     text-align: center;
     background-color: #444444;
-    }
+}
+
 #msg_container {
     line-height: .3;
     max-height: 200px;
     height: 150px;
 }
-canvas{ 
+
+canvas {
     border: 1px solid white;
     background: url('../images/giphy.gif');
+    margin-right: 10px;
+    width: 900px;
+    height: 800px;
 }
+
 #button {
     background: url('../images/button.png');
 }
+
 div#control {
-    position: absolute;
-    margin-top: 20em;
-    margin-left: 6.8em;
-    opacity: .4;
+   display: none;
 }
- @media (max-width: 65em) {
-    h1{
+
+@media (max-width: 65em) {
+    h1 {
         font-size: 10px;
         display: none;
     }
     #msg_container {
         display: none;
     }
+    
     canvas {
         margin-top: 30px;
         width: 50%;
         height: 375px;
+        margin-right: 30px;
     }
- };
+    div#control {
+        display: block;
+        position: absolute;
+        margin-top: 20em;
+        margin-left: 8em;
+        opacity: .4;
+    }
+    
+    img#shootbtn {
+        position: absolute;
+        margin-left: 37em;
+        margin-top: -3.5em;
+    }
+}
 
-
-  /* display: block;
+;
+/* display: block;
     position: absolute;
     margin-left: 250px;
     margin-top: 0px;

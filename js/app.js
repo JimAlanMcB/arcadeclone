@@ -20,7 +20,7 @@ canvas.height = 675;
 // let bgMusic = new Audio('../sounds/OffLimits.wav');
 // bgMusic.preload = "auto";
 
- // make a loop for sound
+// make a loop for sound
 
 
 
@@ -31,13 +31,13 @@ let Game = {
     lives: 3,
     score: 0,
     spawnEnemies: function (enemyCount) {
-        if(this.level >= 5){
+        if (this.level >= 5) {
             enemyCount = 35;
-        }else if(this.level >= 10){
+        } else if (this.level >= 10) {
             enemyCount = 55;
-        }else if(this.level >= 15){
+        } else if (this.level >= 15) {
             enemyCount = 65;
-        }else {
+        } else {
             enemyCount = 25;
         }
         allCollectables = [];
@@ -46,7 +46,7 @@ let Game = {
         collectableCount = 10;
         for (let i = 0; i < collectableCount; i++) {
             allCollectables.push(new Collectable);
-        }        
+        }
         for (i = 0; i < enemyCount; i++) {
             allEnemies.push(new Enemy);
         }
@@ -108,9 +108,9 @@ let Game = {
         ctx.clearRect(0, 0, 707, 808);
         addEntities();
         this.createWalls();
-        if(this.level >= 5){
+        if (this.level >= 5) {
             this.randomWalls(10);
-        }else if(this.level >= 10){
+        } else if (this.level >= 10) {
             this.randomWalls(20);
         }
     },
@@ -124,7 +124,7 @@ let Game = {
         this.updateLevelMsgArea();
         addEntities();
         this.createWalls();
-        
+
     },
     createWalls: function () {
         walls = [];
@@ -139,9 +139,9 @@ let Game = {
         for (col = 0; col < canvas.width / col; col++) {
             walls.push(new Wall(col * x, y));
         }
-    }, 
-    randomWalls: function (num){
-        for(i=0;i < num; i++){
+    },
+    randomWalls: function (num) {
+        for (i = 0; i < num; i++) {
             walls.push(new Wall(pos.random(500), pos.randomY(600)));
             console.log(walls);
         }
@@ -190,20 +190,21 @@ Game.createWalls();
 
 // ------------------------------------------------Decals 
 bullets = [];
+
 function fireBullet() {
-    if(bulletDirection == 'right'){
-    bullets.push(new Bullet('right'));
+    if (bulletDirection == 'right') {
+        bullets.push(new Bullet('right'));
     }
-    if(bulletDirection == 'left'){
-    bullets.push(new Bullet('left'));
+    if (bulletDirection == 'left') {
+        bullets.push(new Bullet('left'));
     }
-    if(bulletDirection == 'up'){
-    bullets.push(new Bullet('up'));    
+    if (bulletDirection == 'up') {
+        bullets.push(new Bullet('up'));
     }
-    if(bulletDirection == 'down'){
-    bullets.push(new Bullet('down'));
+    if (bulletDirection == 'down') {
+        bullets.push(new Bullet('down'));
     }
-    
+
 }
 let Bullet = function (direction) {
     this.sprite = 'images/bullet.png';
@@ -212,7 +213,7 @@ let Bullet = function (direction) {
     this.height = 13;
     this.width = 13;
     this.bulletDirection = direction;
-    
+
 }
 
 Bullet.prototype.render = function () {
@@ -220,19 +221,19 @@ Bullet.prototype.render = function () {
 };
 Bullet.prototype.update = function (dt) {
     // console.log('X: ' +this.x+ 'Y: ' +this.y);
-    
-        if(this.bulletDirection == 'right'){
-            this.x += 5;
-        }
-        if(this.bulletDirection == 'left'){
-            this.x -= 5;
-        }
-        if(this.bulletDirection == 'up'){
-            this.y -= 5;
-        }
-        if(this.bulletDirection == 'down'){
-            this.y += 5;
-        }   
+
+    if (this.bulletDirection == 'right') {
+        this.x += 5;
+    }
+    if (this.bulletDirection == 'left') {
+        this.x -= 5;
+    }
+    if (this.bulletDirection == 'up') {
+        this.y -= 5;
+    }
+    if (this.bulletDirection == 'down') {
+        this.y += 5;
+    }
 
     if (bullets.length > 5) {
         bullets.pop();
@@ -255,7 +256,7 @@ Bullet.prototype.update = function (dt) {
         }
     });
     for (b in bullets) {
-       if (bullets[b].y < 0 || bullets[b].x > canvas.width || bullets[b].x < 0 || bullets[b].y > canvas.height) {
+        if (bullets[b].y < 0 || bullets[b].x > canvas.width || bullets[b].x < 0 || bullets[b].y > canvas.height) {
             for (x in bullets) {
                 delete bullets[b];
             }
@@ -324,30 +325,30 @@ let Player = function (x, y) {
     this.height = 18;
     this.width = 18;
     this.speed = 300;
-    
+
 }
 Player.prototype.update = function (dt) {
-    
-    movePlayer = function(e){
-        if(e == 'down'){
+
+    movePlayer = function (e) {
+        if (e == 'down') {
             player.y += (player.speed * dt);
             bulletDirection = 'down';
         }
-        if(e == 'up'){
+        if (e == 'up') {
             player.y -= (player.speed * dt);
             bulletDirection = 'up';
         }
-        if(e == 'right'){
+        if (e == 'right') {
             player.x += (player.speed * dt);
             bulletDirection = 'right';
         }
-        if(e == 'left'){
+        if (e == 'left') {
             player.x -= (player.speed * dt);
             bulletDirection = 'left';
         }
     }
     if (player.y <= 0) {
-        
+
         this.x = 340;
         this.y = 675;
         Game.levelUp();
@@ -420,30 +421,42 @@ Game.spawnEnemies();
 
 player = new Player(340, 675) // spawn player
 
-document.getElementById('upcontrol').addEventListener('touchstart', function(e){
+// ################################################################## Mobile controls 
+// #### Could refactor to a function, but not much of a reason to. 
+
+document.getElementById('upcontrol').addEventListener('touchstart', function (e) {
     e.preventDefault();
     movePlayer('up');
 });
-document.getElementById('downcontrol').addEventListener('touchstart', function(e){
+document.getElementById('downcontrol').addEventListener('touchstart', function (e) {
     e.preventDefault();
     movePlayer('down');
 });
-document.getElementById('rightcontrol').addEventListener('touchstart', function(e){
+document.getElementById('rightcontrol').addEventListener('touchstart', function (e) {
     e.preventDefault();
     movePlayer('right');
 });
-document.getElementById('leftcontrol').addEventListener('touchstart', function(e){
+document.getElementById('leftcontrol').addEventListener('touchstart', function (e) {
     e.preventDefault();
     movePlayer('left');
 });
-document.getElementById('shoot').addEventListener('touchstart', function(e){
+document.getElementById('shootbtn').addEventListener('touchstart', function (e) {
     e.preventDefault();
     fireBullet();
 });
+let body = document.querySelector('html')
 
+body.addEventListener('touchstart', function (e) {
+    e.preventDefault();
+    // stop double click zoom on phones. 
+}, {
+    passive: false
+});
+
+//################################################################## Mobile 
 
 document.addEventListener('keydown', function (e) {
-    
+
     var allowedKeys = {
         37: 'left',
         38: 'up',
@@ -471,7 +484,7 @@ document.addEventListener('keyup', function (e) {
 });
 bgMusic.play();
 let music = setInterval(() => {
-    bgMusic.pause(); 
+    bgMusic.pause();
     bgMusic.currentTime = 0;
-    bgMusic.play(); 
+    bgMusic.play();
 }, 30000);

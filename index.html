@@ -1,42 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Robotica</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 </head>
+
 <body>
-    <h1><<< ROBOTICA >>></h1>
+    <h1>ROBOT OVERLORDS</h1>
     <div id='msg_container'>
-    <h2>Items Collected: <span id="game_msg_area_items">0</span></h2>
-    <h2>Level: <span id="game_msg_area_level">1</span></h2>
-    <h2>Lives: <span id="game_msg_area_lives">3</span></h2><h2>Score: <span id='game_msg_area_score'>0</span></h2>
+        <h2>Items Collected:
+            <span id="game_msg_area_items">0</span>
+        </h2>
+        <h2>Level:
+            <span id="game_msg_area_level">1</span>
+        </h2>
+        <h2>Lives:
+            <span id="game_msg_area_lives">3</span>
+        </h2>
+        <h2>Score:
+            <span id='game_msg_area_score'>0</span>
+        </h2>
     </div>
-   
+
     <script src="js/resources.js"></script>
     <div id="control">
-    <div>
-    <img src="./images/up.png" alt="" id='upcontrol'>
+        <div>
+            <img src="./images/up.png" alt="" id='upcontrol'>
+        </div>
+        <div>
+            <img src="./images/left.png" alt="" id='leftcontrol'>
+
+            <img src="./images/right.png" alt="" id='rightcontrol'>
+        </div>
+        <div>
+            <img src="./images/down.png" alt="" id='downcontrol'>
+        </div>
+        <div>
+            <img src="./images/button.png" alt="" id="shootbtn">
+        </div>
+        <script src="js/engine.js"></script>
+        <script src="js/app.js"></script>
     </div>
-    <div>
-    <img src="./images/left.png" alt="" id='leftcontrol'>
-    
-    <img src="./images/right.png" alt="" id='rightcontrol'>
-    </div>     
-    <div>
-    <img src="./images/down.png" alt="" id='downcontrol'>
-    </div>
-    <script src="js/engine.js"></script>
-    <script src="js/app.js"></script>
-    </div>
-    <img src='./images/button.png' alt="button" id='shoot'>
-    
-    <!-- <script>
-    let new_canvas = document.getElementsByTagName('canvas');
-    let aspectRatio = 1.5;
-    new_canvas.height = new_canvas.width * aspectRatio;
-    </script> -->
 </body>
 </html>
- 
