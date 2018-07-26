@@ -469,9 +469,9 @@ shootBtn.addEventListener('touchstart', function (e) {
 restartButton.addEventListener('click', function () {
     Game.reset();
 });
-$(restartButton).on('tap', function (){
+restartButton.addEventListener('touchstart', function () {
     Game.reset();
-})
+});
 let body = document.querySelector('html')
 
 
