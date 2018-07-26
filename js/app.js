@@ -4,14 +4,17 @@
 // REFACTOR
 // EASY / HARD MODE
 //
-let winText = document.getElementById('winText');
 let bullets;
 let bulletDirection = 'up';
-let canvas = document.getElementsByTagName('canvas');
+const winText = document.getElementById('winText');
+const canvas = document.getElementsByTagName('canvas');
 canvas.width = 705;
 canvas.height = 675;
-// let bgMusic = new Audio('../sounds/OffLimits.wav');
-// bgMusic.preload = "auto";
+const winPopUpSpan = document.getElementsByClassName("close")[0];
+const restartButton = document.getElementById('start');
+
+const bgMusic = new Audio('../sounds/OffLimits.wav');
+bgMusic.preload = "auto";
 
 // make a loop for sound
 
@@ -49,48 +52,46 @@ let Game = {
         }
 
     },
-    updateItemsMsgArea: function () {
-        itemsMsgArea = document.getElementById('game_msg_area_items');
-        itemsMsgArea.innerHTML = this.itemCount;
-    },
     updateLevelMsgArea: function () {
-        levelMsgArea = document.getElementById('game_msg_area_level');
-        levelMsgArea.innerHTML = this.level;
-    },
-    updateLivesMsgArea: function () {
-        livesMsgArea = document.getElementById('game_msg_area_lives');
-        if (this.lives < 1) {
-            this.lives = 0;
-            
+
+        if (this.level > 1) {
+            this.level -= 1;
             winPopUp.style.display = "block";
-            winText.innerHTML = 'GAME OVER'
-        
-       
-            let winPopUpSpan = document.getElementsByClassName("close")[0];
-        
+            restartButton.style.display = "inline-block";
+            winText.innerHTML = 'You WIN!!!<br>Score: ' + Game.score + '<br>Final Level:' + Game.level + '<br>Items Collected:' + Game.itemCount
             winPopUpSpan.onclick = function () {
                 winPopUp.style.display = "none";
             }
-        
-            window.onclick = function (e) {
-                if (e.target == winPopUp) {
-                    winPopUp.style.display = "none";
-                }
+        } else {
+            winPopUp.style.display = "block";
+            winText.innerHTML = 'Level ' + Game.level + '<br>Score:' + Game.score
+            restartButton.style.display = "none";
+            winPopUpSpan.onclick = function () {
+                winPopUp.style.display = "none";
             }
-            // Game over
-            // GAME OVER MODEL PLACEHOLDER
-                
             setTimeout(() => {
-                
-                Game.reset();
-            }, 3000); 
+                winPopUp.style.display = "none";
+            }, 2000);
         }
-        livesMsgArea.innerHTML = this.lives;
+
+
+
+    },
+    updateLivesMsgArea: function () {
+
+        if (this.lives < 1) {
+            this.lives = 0;
+            winPopUp.style.display = "block";
+            restartButton.style.display = "inline-block";
+            winText.innerHTML = 'GAME OVER<br>Score: ' + Game.score + '<br>Final Level:' + Game.level + '<br>Items Collected:' + Game.itemCount
+            winPopUpSpan.onclick = function () {
+                winPopUp.style.display = "none";
+            }
+        }
+
     },
     scoreUp: function (num) {
-        scoreMsgArea = document.getElementById('game_msg_area_score');
         this.score += num;
-        scoreMsgArea.innerHTML = this.score;
     },
     checkCollision: function (player, element) {
 
@@ -115,12 +116,10 @@ let Game = {
         }
     },
     levelUp: function () {
-        // LEVEL UP MODAL
+
         this.itemCount = 0;
         this.level += 1;
         this.score += 2000;
-        this.updateItemsMsgArea();
-        this.updateLevelMsgArea();
         ctx.clearRect(0, 0, 707, 808);
         addEntities();
         this.createWalls();
@@ -129,6 +128,7 @@ let Game = {
         } else if (this.level >= 10) {
             this.randomWalls(20);
         }
+
     },
     reset: function () {
         ctx.clearRect(0, 0, 707, 808);
@@ -136,10 +136,10 @@ let Game = {
         this.level = 1;
         this.lives = 3;
         this.score = 0;
-        this.updateItemsMsgArea();
-        this.updateLevelMsgArea();
         addEntities();
         this.createWalls();
+        winPopUp.style.display = "none";
+
 
     },
     createWalls: function () {
@@ -380,11 +380,10 @@ Player.prototype.update = function (dt) {
     });
     // ------------------------------------------------- WALL COLLISION
     allEnemies.forEach(element => {
-       
+
         if ((element.x >= collisionBox.leftBox) && (element.x <= collisionBox.rightBox) && (element.y <= collisionBox.bottomBox) && (element.y >= collisionBox.topBox)) {
 
             Game.itemCount = 0;
-            Game.updateItemsMsgArea();
             this.x = 340;
             this.y = 675;
             Game.lives -= 1;
@@ -396,7 +395,6 @@ Player.prototype.update = function (dt) {
 
             Game.itemCount += 1;
             Game.scoreUp(1000);
-            Game.updateItemsMsgArea();
             delete element;
             element.x = -500; // just move offscreen for now
             element.y = -600;
@@ -459,7 +457,11 @@ document.getElementById('shootbtn').addEventListener('touchstart', function (e) 
     e.preventDefault();
     fireBullet();
 });
+restartButton.addEventListener('click', function () {
+    Game.reset();
+});
 let body = document.querySelector('html')
+
 
 body.addEventListener('touchstart', function (e) {
     e.preventDefault();

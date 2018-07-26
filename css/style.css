@@ -4,6 +4,37 @@ body {
     color: white;
     text-align: center;
     background-color: #444444;
+    text-shadow: 2px 2px 4px rgb(0, 46, 253);
+    background: url('../images/sky-space-dark-galaxy.jpg');
+}
+
+.overlay {
+    position: fixed;
+    z-index:-1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(54, 88, 138, 0.68)
+}
+
+#portrait{
+    color: white;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 102, 255);
+    background: url('../images/sky-space-dark-galaxy.jpg');
+    background-size: cover;
+}
+#portrait p{
+    margin-top: 70%;
+    font-size: 50px;
 }
 
 #msg_container {
@@ -12,10 +43,14 @@ body {
     height: 150px;
 }
 
+h1 {
+    color: rgb(7, 135, 255);
+    text-shadow: 2px 2px 4px rgb(212, 180, 159);
+}
+
 canvas {
     border: 1px solid white;
     background: url('../images/giphy.gif');
-    margin-right: 10px;
     width: 900px;
     height: 800px;
 }
@@ -25,8 +60,23 @@ canvas {
 }
 
 div#control {
-   display: none;
+    display: none;
 }
+
+.start {
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 2px 2px 4px rgb(255, 156, 90);
+    margin-bottom: 10px;
+    box-shadow: 0 7px 0 0 rgb(5, 33, 85);
+    background: rgb(13, 90, 162);
+    color: rgb(255, 255, 220);
+    padding: 1em 2em;
+    border: 0;
+    cursor: pointer;
+    font-size: 20px;
+    opacity: 0.9;
+}
+
 .winPopUp {
     display: none;
     position: fixed;
@@ -37,27 +87,24 @@ div#control {
     height: 100%;
     overflow: auto;
     background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .winPopUp-content {
-    background-color: rgb(10, 177, 238);
-    margin: 15% auto;
+    background-color: rgb(14, 14, 14);
+    margin: 20% auto;
+    height: auto;
+    width: 35%;
     padding: 20px;
-    border: 1px solid rgba(168, 0, 119, 0.98);
-    width: 50%;
-    height: 30%;
+    border: 1px solid rgb(59, 59, 59);
     font-size: 25px;
-    border-radius: 10px;
     text-align: center;
-    font-family: 'Bubblegum Sans', cursive;
-    color: yellow;
-    text-shadow: 2px 2px 4px rgb(120, 5, 252);
+    color: #e9e9e9;
     font-weight: 500;
 }
 
 .close {
-    color: yellow;
+    color: #f0f0f0;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -75,53 +122,47 @@ div#control {
         /* margin-top: 50%; */
         margin-top: auto;
     }
-    .winPopUp-content{
+    .winPopUp-content {
         width: 60%;
         height: auto;
     }
 }
 
-
-@media screen and (min-height: 400px) {
-    .board {
-        grid-template-rows: 75px 75px 75px 75px 5px;
-    }
-    .container {
-        max-height: -webkit-fill-available;
-    }
-}
-
 @media (max-width: 65em) {
     h1 {
-        font-size: 10px;
-        display: none;
+        font-size: 20px;
     }
     #msg_container {
         display: none;
     }
-    
     canvas {
-        margin-top: 30px;
         width: 50%;
         height: 375px;
-        margin-right: 30px;
     }
     div#control {
         display: block;
         position: absolute;
-        margin-top: 20em;
-        margin-left: 8em;
+        margin-top: 15em;
+        margin-left: 5em;
         opacity: .4;
     }
-    
     img#shootbtn {
         position: absolute;
-        margin-left: 37em;
+        margin-left: 42em;
         margin-top: -3.5em;
     }
 }
+@media screen and (orientation:portrait){
+    #portrait {
+        display: block;
+    }
+}
+@media screen and (orientation:landscape){
+    #portrait {
+        display: none;
+    }
+}
 
-;
 /* display: block;
     position: absolute;
     margin-left: 250px;
