@@ -343,6 +343,10 @@ let Player = function (x, y) {
 }
 Player.prototype.update = function (dt) {
 
+    if ('ontouchstart' in document) {
+        player.speed = 700;
+        // for adjusting speed based on mobile, because can't get touchhold to work at the moment correctly. 
+    }
     movePlayer = function (e) {
         if (e == 'down') {
             player.y += (player.speed * dt);
@@ -435,25 +439,31 @@ player = new Player(340, 675) // spawn player
 
 // ################################################################## Mobile controls 
 // #### Could refactor to a function, but not much of a reason to.
-// Need to add touch  
 
-document.getElementById('upcontrol').addEventListener('touchstart', function (e) {
+const upControl = document.getElementById('upcontrol');
+const downControl = document.getElementById('downcontrol');
+const rightControl = document.getElementById('rightcontrol');
+const leftControl = document.getElementById('leftcontrol');
+const shootBtn = document.getElementById('shootbtn');
+
+// ADD TOUCH HOLD
+upControl.addEventListener('touchstart', function (e) {
     e.preventDefault();
     movePlayer('up');
 });
-document.getElementById('downcontrol').addEventListener('touchstart', function (e) {
+downControl.addEventListener('touchstart', function (e) {
     e.preventDefault();
     movePlayer('down');
 });
-document.getElementById('rightcontrol').addEventListener('touchstart', function (e) {
+rightControl.addEventListener('touchstart', function (e) {
     e.preventDefault();
     movePlayer('right');
 });
-document.getElementById('leftcontrol').addEventListener('touchstart', function (e) {
+leftControl.addEventListener('touchstart', function (e) {
     e.preventDefault();
     movePlayer('left');
 });
-document.getElementById('shootbtn').addEventListener('touchstart', function (e) {
+shootBtn.addEventListener('touchstart', function (e) {
     e.preventDefault();
     fireBullet();
 });
