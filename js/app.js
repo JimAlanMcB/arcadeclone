@@ -54,7 +54,7 @@ let Game = {
     },
     updateLevelMsgArea: function () {
 
-        if (this.level > 1) {
+        if (this.level > 20) {
             this.level -= 1;
             winPopUp.style.display = "block";
             restartButton.style.display = "inline-block";
@@ -159,7 +159,6 @@ let Game = {
     randomWalls: function (num) {
         for (i = 0; i < num; i++) {
             walls.push(new Wall(pos.random(500), pos.randomY(600)));
-            console.log(walls);
         }
     }
 }

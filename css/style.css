@@ -10,7 +10,7 @@ body {
 
 .overlay {
     position: fixed;
-    z-index:-1;
+    z-index: -1;
     left: 0;
     top: 0;
     width: 100%;
@@ -19,7 +19,7 @@ body {
     background-color: rgba(54, 88, 138, 0.68)
 }
 
-#portrait{
+#portrait {
     color: white;
     position: fixed;
     z-index: 1;
@@ -32,7 +32,8 @@ body {
     background: url('../images/sky-space-dark-galaxy.jpg');
     background-size: cover;
 }
-#portrait p{
+
+#portrait p {
     margin-top: 70%;
     font-size: 50px;
 }
@@ -152,12 +153,14 @@ div#control {
         margin-top: -3.5em;
     }
 }
-@media screen and (orientation:portrait){
+
+@media screen and (orientation:portrait) {
     #portrait {
         display: block;
     }
 }
-@media screen and (orientation:landscape){
+
+@media screen and (orientation:landscape) {
     #portrait {
         display: none;
     }
