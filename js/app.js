@@ -1,17 +1,10 @@
 // TODO: 
-// 
-// 
-// ADJUST CSS
-// 
+
 // ADD README
 // REFACTOR
 // EASY / HARD MODE
-// DIFFERENT ENEMY COLORS
-// 
-// make look like Gameboy
-// mobile touch contorls with different screen on mobile 
-// choose char and weapon
-// 
+//
+let winText = document.getElementById('winText');
 let bullets;
 let bulletDirection = 'up';
 let canvas = document.getElementsByTagName('canvas');
@@ -68,8 +61,29 @@ let Game = {
         livesMsgArea = document.getElementById('game_msg_area_lives');
         if (this.lives < 1) {
             this.lives = 0;
+            
+            winPopUp.style.display = "block";
+            winText.innerHTML = 'GAME OVER'
+        
+       
+            let winPopUpSpan = document.getElementsByClassName("close")[0];
+        
+            winPopUpSpan.onclick = function () {
+                winPopUp.style.display = "none";
+            }
+        
+            window.onclick = function (e) {
+                if (e.target == winPopUp) {
+                    winPopUp.style.display = "none";
+                }
+            }
             // Game over
-            Game.reset();
+            // GAME OVER MODEL PLACEHOLDER
+                
+            setTimeout(() => {
+                
+                Game.reset();
+            }, 3000); 
         }
         livesMsgArea.innerHTML = this.lives;
     },
@@ -101,8 +115,10 @@ let Game = {
         }
     },
     levelUp: function () {
+        // LEVEL UP MODAL
         this.itemCount = 0;
         this.level += 1;
+        this.score += 2000;
         this.updateItemsMsgArea();
         this.updateLevelMsgArea();
         ctx.clearRect(0, 0, 707, 808);
@@ -220,8 +236,6 @@ Bullet.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 Bullet.prototype.update = function (dt) {
-    // console.log('X: ' +this.x+ 'Y: ' +this.y);
-
     if (this.bulletDirection == 'right') {
         this.x += 5;
     }
@@ -366,7 +380,7 @@ Player.prototype.update = function (dt) {
     });
     // ------------------------------------------------- WALL COLLISION
     allEnemies.forEach(element => {
-        // console.log('X: '+Math.ceil(element.x), 'Y:' + element.y);
+       
         if ((element.x >= collisionBox.leftBox) && (element.x <= collisionBox.rightBox) && (element.y <= collisionBox.bottomBox) && (element.y >= collisionBox.topBox)) {
 
             Game.itemCount = 0;
@@ -422,7 +436,8 @@ Game.spawnEnemies();
 player = new Player(340, 675) // spawn player
 
 // ################################################################## Mobile controls 
-// #### Could refactor to a function, but not much of a reason to. 
+// #### Could refactor to a function, but not much of a reason to.
+// Need to add touch  
 
 document.getElementById('upcontrol').addEventListener('touchstart', function (e) {
     e.preventDefault();
@@ -456,7 +471,7 @@ body.addEventListener('touchstart', function (e) {
 //################################################################## Mobile 
 
 document.addEventListener('keydown', function (e) {
-
+    e.preventDefault();
     var allowedKeys = {
         37: 'left',
         38: 'up',
@@ -471,7 +486,7 @@ document.addEventListener('keydown', function (e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 document.addEventListener('keyup', function (e) {
-
+    e.preventDefault();
     var allowedKeys = {
         37: 'left',
         38: 'up',

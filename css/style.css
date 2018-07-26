@@ -27,6 +27,69 @@ canvas {
 div#control {
    display: none;
 }
+.winPopUp {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.winPopUp-content {
+    background-color: rgb(10, 177, 238);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid rgba(168, 0, 119, 0.98);
+    width: 50%;
+    height: 30%;
+    font-size: 25px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Bubblegum Sans', cursive;
+    color: yellow;
+    text-shadow: 2px 2px 4px rgb(120, 5, 252);
+    font-weight: 500;
+}
+
+.close {
+    color: yellow;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 450px) {
+    main {
+        /* margin-top: 50%; */
+        margin-top: auto;
+    }
+    .winPopUp-content{
+        width: 60%;
+        height: auto;
+    }
+}
+
+
+@media screen and (min-height: 400px) {
+    .board {
+        grid-template-rows: 75px 75px 75px 75px 5px;
+    }
+    .container {
+        max-height: -webkit-fill-available;
+    }
+}
 
 @media (max-width: 65em) {
     h1 {
